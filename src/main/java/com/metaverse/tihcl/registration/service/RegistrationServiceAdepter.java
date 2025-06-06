@@ -27,7 +27,10 @@ public class RegistrationServiceAdepter implements RegistrationService {
         if (request.getRegistrationId() == null) {
          if(registrationRepository.findByContactNumber(request.getContactNumber()) != null)
          return TihclResponse.builder().message(request.getContactNumber() + " This Number is already exists").status(400).build();
-            registration = RegistrationRequestMapper.mapRegistration(request);
+         String applicationNo="TH"+((int)(Math.random() * 900000) + 10000);
+         if(registrationRepository.existsByApplicationNo(applicationNo))
+             applicationNo="TH"+((int)(Math.random() * 900000) + 100000);
+            registration = RegistrationRequestMapper.mapRegistration(request,applicationNo);
         } else {
             registration = registrationRepository.findById(request.getRegistrationId())
                     .orElseThrow(() -> new DataException(
@@ -70,10 +73,20 @@ public class RegistrationServiceAdepter implements RegistrationService {
     }
 
     @Override
+    public TihclResponse getRegistrationByMobilNo(Long mobileNo) throws DataException {
+        Registration registration = registrationRepository.findByContactNumber(mobileNo);
+        if (registration == null)
+            return TihclResponse.builder().message("No registrations found in the system.").status(400).build();
+        return TihclResponse.builder().message("Success").status(200)
+                .data(RegistrationResponseMapper.map(registration)).build();
+
+    }
+
+    @Override
     public TihclResponse getAllRegistrations() throws DataException {
         List<Registration> registrationList = registrationRepository.findAll();
         if (registrationList.isEmpty())
-            return TihclResponse.builder().message("No registrations found in the system.").status(400).build();
+            return TihclResponse.builder().message("No registrations found ").status(400).build();
         List<RegistrationResponse> responseList = registrationList.stream().map(RegistrationResponseMapper::map).collect(Collectors.toList());
         return TihclResponse.builder().message("Success").status(200).data(responseList).build();
     }

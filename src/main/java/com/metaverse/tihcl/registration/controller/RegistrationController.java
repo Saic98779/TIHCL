@@ -53,4 +53,14 @@ public class RegistrationController {
         }
         return  ResponseEntity.ok(registration);
     }
+    @GetMapping("/mobile/no/{mobileNo}")
+    public ResponseEntity<?> getAllRegistration(@PathVariable Long mobileNo) {
+        TihclResponse registration = null;
+        try {
+            registration = registrationService.getRegistrationByMobilNo(mobileNo);
+        } catch (DataException exception) {
+            return  RestControllerBase.error(exception);
+        }
+        return  ResponseEntity.ok(registration);
+    }
 }

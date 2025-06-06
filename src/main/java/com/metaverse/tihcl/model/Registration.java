@@ -120,6 +120,12 @@ public class Registration {
     @Column(name="help_msg")
     private String helpMsg;
 
+    @Column(name="application_no")
+    private String applicationNo;
+
+    @Column(name="status")
+    private String status;
+
     @Column(name="created_on",insertable = true,updatable = false)
     @CreationTimestamp
     private Date createdOn;

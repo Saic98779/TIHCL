@@ -6,8 +6,8 @@ import com.metaverse.tihcl.model.CreditFacilityDetails;
 import java.util.stream.Collectors;
 
 public class RegistrationRequestMapper {
-
-    public static Registration mapRegistration(RegistrationRequest request) {
+private static final String STATUS="Pending";
+    public static Registration mapRegistration(RegistrationRequest request,String applicationNo) {
         Registration.RegistrationBuilder registrationBuilder = Registration.builder()
                 .enterpriseName(request.getEnterpriseName())
                 .promoterName(request.getPromoterName())
@@ -39,6 +39,8 @@ public class RegistrationRequestMapper {
                 .amountReleased(request.getAmountReleased())
                 .amountToBeReleased(request.getAmountToBeReleased())
                 .maintainingAccountBy(request.getMaintainingAccountBy())
+                .status(STATUS)
+                .applicationNo(applicationNo)
                 .helpMsg(request.getHelpMsg());
 
         // Map the CreditFacilityDetails List

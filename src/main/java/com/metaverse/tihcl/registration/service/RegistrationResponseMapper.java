@@ -48,6 +48,9 @@ public class RegistrationResponseMapper {
                 .amountToBeReleased(registration.getAmountToBeReleased())
                 .helpMsg(registration.getHelpMsg())
                 .maintainingAccountBy(registration.getMaintainingAccountBy())
+                .applicationNo(registration.getApplicationNo())
+                .status(registration.getStatus())
+                .dateOfSubmission(DateUtil.dateToString(registration.getCreatedOn()))
                 .build();
     }
 

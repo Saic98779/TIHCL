@@ -44,4 +44,7 @@ public class RegistrationResponse {
     private Double amountToBeReleased;
     private String maintainingAccountBy;
     private String helpMsg;
+    private String applicationNo;
+    private String status;
+    private String dateOfSubmission;
 }
