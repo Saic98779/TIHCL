@@ -26,7 +26,7 @@ public class RegistrationServiceAdepter implements RegistrationService {
         Registration registration;
         if (request.getRegistrationId() == null) {
          if(registrationRepository.findByContactNumber(request.getContactNumber()) != null)
-         return TihclResponse.builder().message(request.getContactNumber() + " This Number is already exists").status(400).build();
+         return TihclResponse.builder().message(request.getContactNumber() + " This Contact Number is already exists").status(400).build();
          String applicationNo="TH"+((int)(Math.random() * 900000) + 10000);
          if(registrationRepository.existsByApplicationNo(applicationNo))
              applicationNo="TH"+((int)(Math.random() * 900000) + 100000);
