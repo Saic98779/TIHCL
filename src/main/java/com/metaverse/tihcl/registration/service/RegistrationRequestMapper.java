@@ -3,11 +3,13 @@ package com.metaverse.tihcl.registration.service;
 import com.metaverse.tihcl.common.util.DateUtil;
 import com.metaverse.tihcl.model.Registration;
 import com.metaverse.tihcl.model.CreditFacilityDetails;
+import com.metaverse.tihcl.model.RegistrationUsage;
+
 import java.util.stream.Collectors;
 
 public class RegistrationRequestMapper {
-
-    public static Registration mapRegistration(RegistrationRequest request) {
+private static final String STATUS="Pending";
+    public static Registration mapRegistration(RegistrationRequest request,String applicationNo) {
         Registration.RegistrationBuilder registrationBuilder = Registration.builder()
                 .enterpriseName(request.getEnterpriseName())
                 .promoterName(request.getPromoterName())
@@ -39,6 +41,8 @@ public class RegistrationRequestMapper {
                 .amountReleased(request.getAmountReleased())
                 .amountToBeReleased(request.getAmountToBeReleased())
                 .maintainingAccountBy(request.getMaintainingAccountBy())
+                .status(STATUS)
+                .applicationNo(applicationNo)
                 .helpMsg(request.getHelpMsg());
 
         // Map the CreditFacilityDetails List
@@ -62,6 +66,49 @@ public class RegistrationRequestMapper {
                 .build();
     }
 
+    public static RegistrationUsage mapRegistrationUsage(Registration request) {
+        return RegistrationUsage.builder()
+                .enterpriseName(request.getEnterpriseName())
+                .promoterName(request.getPromoterName())
+                .constitution(request.getConstitution())
+                .productionDate(request.getProductionDate())
+                .udyamRegNumber(request.getUdyamRegNumber())
+                .contactNumber(request.getContactNumber())
+                .industrialPark(request.getIndustrialPark())
+                .state(request.getState())
+                .district(request.getDistrict())
+                .mandal(request.getMandal())
+                .email(request.getEmail())
+                .address(request.getAddress())
+                .enterpriseCategory(request.getEnterpriseCategory())
+                .natureOfActivity(request.getNatureOfActivity())
+                .sector(request.getSector())
+                .operationStatus(request.getOperationStatus())
+                .operatingSatisfactorily(request.getOperatingSatisfactorily())
+                .operatingDifficulties(request.getOperatingDifficulties())
+                .issueDate(request.getIssueDate() )
+                .reasonForNotOperating(request.getReasonForNotOperating())
+                .restartSupport(request.getRestartSupport())
+                .restartIntent(request.getRestartIntent())
+                .existingCredit(request.getExistingCredit())
+                .unitStatus(request.getUnitStatus())
+                .requiredCreditLimit(request.getRequiredCreditLimit())
+                .investmentSubsidy(request.getInvestmentSubsidy())
+                .totalAmountSanctioned(request.getTotalAmountSanctioned())
+                .amountReleased(request.getAmountReleased())
+                .amountToBeReleased(request.getAmountToBeReleased())
+                .maintainingAccountBy(request.getMaintainingAccountBy())
+                .status(STATUS)
+                .applicationNo(request.getApplicationNo())
+                .helpMsg(request.getHelpMsg())
+                .creditFacilityDetails(request.getCreditFacilityDetails())
+                .build();
+
+
+
+
+
+    }
     public static void updateRegistrationFromRequest(Registration registration, RegistrationRequest request) {
         registration.setEnterpriseName(request.getEnterpriseName());
         registration.setPromoterName(request.getPromoterName());

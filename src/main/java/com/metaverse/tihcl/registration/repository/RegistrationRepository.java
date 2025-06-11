@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RegistrationRepository extends JpaRepository<Registration,Long> {
     Registration findByContactNumber(Long contactNumber);
+
+    boolean existsByApplicationNo(String applicationNo);
 }

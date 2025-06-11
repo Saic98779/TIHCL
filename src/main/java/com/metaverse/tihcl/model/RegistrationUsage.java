@@ -14,12 +14,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="registration")
-public class Registration {
+@Table(name="registration_usage")
+public class RegistrationUsage {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "registration_id")
-    private Long registrationId;
+    @Column(name = "registration_usage_id")
+    private Long registrationUsageId;
 
     @Column(name = "enterprise_name")
     private String enterpriseName;
@@ -125,6 +125,27 @@ public class Registration {
 
     @Column(name="status")
     private String status;
+
+    @Column(name="get_number")
+    private String gstNumber;
+
+    @Column(name="type_of_product")
+    private String typeOfProduct;
+
+    @Column(name="product_usage")
+    private String productUsage;
+
+    @Column(name="problem_faced")
+    private String problemsFaced;
+
+    @Column(name="expected_solution")
+    private String expectedSolution;
+
+    @Column(name="observations")
+    private String observations;
+
+    @Column(name="risk_category_score")
+    private String riskCategoryScore;
 
     @Column(name="created_on",insertable = true,updatable = false)
     @CreationTimestamp

@@ -14,6 +14,9 @@ public class DateUtil {
     }
 
     public static Date stringToDate(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return null;
+        }
 
         String[] dateFormats = {"yyyy-MM-dd", "dd-MM-yyyy", "dd-MMM-yyyy", "d-MMM-yyyy", "d-MM-yyyy"};
 
@@ -28,8 +31,7 @@ public class DateUtil {
             }
         }
 
-        throw new IllegalArgumentException("Invalid date format: " + input);
-
+        return null;
     }
 
 }
