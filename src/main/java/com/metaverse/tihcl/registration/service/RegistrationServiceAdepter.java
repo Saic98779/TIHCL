@@ -4,8 +4,10 @@ import com.metaverse.tihcl.common.response.TihclResponse;
 import com.metaverse.tihcl.exceptions.DataException;
 import com.metaverse.tihcl.model.CreditFacilityDetails;
 import com.metaverse.tihcl.model.Registration;
+import com.metaverse.tihcl.model.RegistrationUsage;
 import com.metaverse.tihcl.registration.repository.CreditFacilityDetailsRepository;
 import com.metaverse.tihcl.registration.repository.RegistrationRepository;
+import com.metaverse.tihcl.registration.repository.RegistrationUsageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,9 @@ import java.util.stream.Collectors;
 public class RegistrationServiceAdepter implements RegistrationService {
     @Autowired
     RegistrationRepository registrationRepository;
+
+    @Autowired
+    RegistrationUsageRepo registrationUsageRepo;
     @Autowired
     CreditFacilityDetailsRepository creditFacilityDetailsRepository;
 
@@ -44,13 +49,13 @@ public class RegistrationServiceAdepter implements RegistrationService {
         if (Boolean.TRUE.equals(request.getExistingCredit()) && request.getCreditFacilityDetails() != null) {
             List<CreditFacilityDetails> creditDetailsList = request.getCreditFacilityDetails().stream()
                     .map(RegistrationRequestMapper::mapCreditFacilityDetails)
-                    .collect(Collectors.toList());
+                    .toList();
             creditDetailsList.forEach(detail -> detail.setRegistration(registration));
 
             registration.getCreditFacilityDetails().clear();
             registration.getCreditFacilityDetails().addAll(creditDetailsList);
         }
-
+        registrationUsageRepo.save(RegistrationRequestMapper.mapRegistrationUsage(registration));
         return TihclResponse.builder()
                 .message("Registration added successfully")
                 .status(200)
@@ -74,7 +79,7 @@ public class RegistrationServiceAdepter implements RegistrationService {
 
     @Override
     public TihclResponse getRegistrationByMobilNo(Long mobileNo) throws DataException {
-        Registration registration = registrationRepository.findByContactNumber(mobileNo);
+        RegistrationUsage registration = registrationUsageRepo.findByContactNumber(mobileNo);
         if (registration == null)
             return TihclResponse.builder().message("No registrations found in the system.").status(400).build();
         return TihclResponse.builder().message("Success").status(200)
