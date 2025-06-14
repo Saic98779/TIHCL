@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="registration_usage")
+@Table(name = "registration_usage")
 public class RegistrationUsage {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,8 +38,10 @@ public class RegistrationUsage {
 
     @Column(name = "contact_number")
     private Long contactNumber;
+    @Column(name = "alt_contact_number")
+    private Long altContactNumber;
 
-    @Column(name="industrial_park")
+    @Column(name = "industrial_park")
     private String industrialPark;
 
     @Column(name = "state")
@@ -91,9 +93,9 @@ public class RegistrationUsage {
     private Boolean existingCredit;
 
     //if yes
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "registration_id")
-    private List<CreditFacilityDetails> creditFacilityDetails;
+    @OneToMany(mappedBy = "registrationUsage", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CreditFacilityDetailsUsage> creditFacilityDetailsUsages;
+
 
     @Column(name = "unit_status")
     private String unitStatus;
@@ -117,41 +119,45 @@ public class RegistrationUsage {
     @Column(name = "maintaining_account_by")
     private String maintainingAccountBy;
 
-    @Column(name="help_msg")
+    @Column(name = "help_msg")
     private String helpMsg;
 
-    @Column(name="application_no")
+    @Column(name = "application_no")
     private String applicationNo;
 
-    @Column(name="status")
+    @Column(name = "status")
     private String status;
 
-    @Column(name="get_number")
+    @Column(name = "get_number")
     private String gstNumber;
 
-    @Column(name="type_of_product")
+    @Column(name = "type_of_product")
     private String typeOfProduct;
 
-    @Column(name="product_usage")
+    @Column(name = "product_usage")
     private String productUsage;
 
-    @Column(name="problem_faced")
+    @Column(name = "problem_faced", length = 1000)
     private String problemsFaced;
 
-    @Column(name="expected_solution")
+    @Column(name = "expected_solution", length = 1000)
     private String expectedSolution;
 
-    @Column(name="observations")
+    @Column(name = "observations", length = 1000)
     private String observations;
 
-    @Column(name="risk_category_score")
-    private String riskCategoryScore;
 
-    @Column(name="created_on",insertable = true,updatable = false)
+    @OneToMany(mappedBy = "registrationUsage", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StressScore> stressScore;
+
+    @Column(name = "risk_category_score")
+    private Double riskCategoryScore;
+
+    @Column(name = "created_on", insertable = true, updatable = false)
     @CreationTimestamp
     private Date createdOn;
 
-    @Column(name="updated_on",insertable = false,updatable = true)
+    @Column(name = "updated_on", insertable = false, updatable = true)
     @UpdateTimestamp
     private Date updatedOn;
 

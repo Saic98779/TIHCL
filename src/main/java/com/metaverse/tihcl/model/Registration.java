@@ -39,6 +39,9 @@ public class Registration {
     @Column(name = "contact_number")
     private Long contactNumber;
 
+    @Column(name = "alt_contact_number")
+    private Long altContactNumber;
+
     @Column(name="industrial_park")
     private String industrialPark;
 
@@ -91,9 +94,9 @@ public class Registration {
     private Boolean existingCredit;
 
     //if yes
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "registration_id")
+    @OneToMany(mappedBy = "registration", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CreditFacilityDetails> creditFacilityDetails;
+
 
     @Column(name = "unit_status")
     private String unitStatus;

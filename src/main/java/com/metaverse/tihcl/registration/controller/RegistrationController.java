@@ -3,15 +3,12 @@ package com.metaverse.tihcl.registration.controller;
 import com.metaverse.tihcl.common.response.TihclResponse;
 import com.metaverse.tihcl.common.util.RestControllerBase;
 import com.metaverse.tihcl.exceptions.DataException;
-import com.metaverse.tihcl.model.Registration;
+import com.metaverse.tihcl.registration.service.PreliminaryAssessmentRequest;
 import com.metaverse.tihcl.registration.service.RegistrationRequest;
 import com.metaverse.tihcl.registration.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import jakarta.validation.Valid;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/registrations")
@@ -62,5 +59,16 @@ public class RegistrationController {
             return  RestControllerBase.error(exception);
         }
         return  ResponseEntity.ok(registration);
+    }
+    @PostMapping("/preliminary/save/{applicationNo}")
+    public ResponseEntity<?> savePreliminaryAssessment(@RequestBody PreliminaryAssessmentRequest request,
+                                                      @PathVariable String applicationNo) throws DataException {
+        TihclResponse savedRegistration = null;
+        try {
+            savedRegistration = registrationService.savePreliminaryAssessment(request,applicationNo);
+        } catch (DataException exception) {
+            return RestControllerBase.error(exception);
+        }
+        return ResponseEntity.ok(savedRegistration);
     }
 }
