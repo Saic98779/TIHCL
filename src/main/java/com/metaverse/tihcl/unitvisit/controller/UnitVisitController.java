@@ -14,8 +14,7 @@ import com.metaverse.tihcl.unitvisit.service.UnitVisitService;
 @RequestMapping(path = "/unitvisit")
 @RequiredArgsConstructor
 public class UnitVisitController {
-	
-	@Autowired
+
 	private final UnitVisitService unitVisitservice;
 
 	@PostMapping(path = "/save")
