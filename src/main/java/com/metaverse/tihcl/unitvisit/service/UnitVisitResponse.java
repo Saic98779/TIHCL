@@ -2,8 +2,6 @@ package com.metaverse.tihcl.unitvisit.service;
 
 import java.util.List;
 
-import com.metaverse.tihcl.model.FactoryDetails;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,15 +10,19 @@ import lombok.Setter;
 @Getter
 @Builder
 public class UnitVisitResponse {
-	
-	
+
     private Long id;
+
 	private String visitedBy;
 	
-	private String dateAndTimeOfVisit;
+	private String dateOfVisit;
+
+	private String timeOfVisit;
 	
-	private String nameOfThePersonMetAndDesignation;
-	
+	private String nameOfThePerson;
+
+	private String designation;
+
 	private String selectLandDetails;
 	
 	private String factoryAddress;
@@ -28,18 +30,16 @@ public class UnitVisitResponse {
 	private Boolean isSameAsFactoryAddress;	
 	
 	private String registerAddress;
-	
 
 	private Boolean isUpgradationRequired;
 	
 	private Boolean isMachineryProperlyAligned;
+
 	private Boolean isCompanyNameBoard;
 	
 	private Boolean isFinancedBankNameBoard;
- 	
-	//staff at the time of visit
-	
-	private Integer officeStaff;
+
+	private Integer officeStaff;// from hear staff at the time of visit
 	
 	private Integer factoryWorkers;
 	
@@ -56,16 +56,13 @@ public class UnitVisitResponse {
 	private Double noOfShifts;
 	
 	private Boolean isStocksStoredProperty;
-	
-	
+
 	private Boolean isAdequateStorageCapacity;
-	
-//	stocks record
-	private String stocksMaintaned;
-	
-	private String isUptoDate;
-	
-	
+
+	private String stocksMaintained;//	from hear stocks record
+
+	private Boolean isUptoDate;
+
 	private Double valueOfTheStock;
 	
 	private String rawMaterials;
@@ -85,15 +82,10 @@ public class UnitVisitResponse {
 	private Double sellingPricePerUnit;
 	
 	private Double profitMargin;
-	
-	//Electricity Bill
-	
-	private Double recentConsumption;
+
+	private Double recentConsumption;//Electricity Bill
 	
 	private Double maxConsumption;
 	
 	private List<FactoryDetailsResponse> factoryDetails;
-
-
-
 }

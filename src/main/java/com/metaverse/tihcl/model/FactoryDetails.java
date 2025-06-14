@@ -5,9 +5,6 @@ import java.util.Date;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -66,11 +63,5 @@ public class FactoryDetails {
 
 	@Column(name = "updated_on", insertable = false, updatable = true)
 	@UpdateTimestamp
-    private Date updatedOn;	
-	
-	
-	
-
-
-
+    private Date updatedOn;
 }

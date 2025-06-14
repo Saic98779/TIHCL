@@ -3,14 +3,11 @@ package com.metaverse.tihcl.unitvisit.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.metaverse.tihcl.model.FactoryDetails;
 import com.metaverse.tihcl.model.UnitVisit;
 
 public class UnitVisitResponseMapper {
-	
-	
-	public static UnitVisitResponse convertEntityToDto(UnitVisit unitVisit) {
 
+	public static UnitVisitResponse convertEntityToDto(UnitVisit unitVisit) {
 	    // Convert child entities first using builder
 	    List<FactoryDetailsResponse> factoryDtoList =  unitVisit.getFactoryDetails()
 	        .stream()
@@ -23,14 +20,14 @@ public class UnitVisitResponseMapper {
 	                .valueOfMachinery(entity.getValueOfMachinery())
 	                .build())
 	        .collect(Collectors.toList());
-
-	    
 	    // Build main DTO
 	    return UnitVisitResponse.builder()
-	    		.id(unitVisit.getUnutVisitId())
+	    		.id(unitVisit.getUnitVisitId())
 	            .visitedBy(unitVisit.getVisitedBy())
-	            .dateAndTimeOfVisit(String.valueOf(unitVisit.getDateAndTimeOfVisit()))
-	            .nameOfThePersonMetAndDesignation(unitVisit.getNameOfThePersonMetAndDesignation())
+	            .dateOfVisit(String.valueOf(unitVisit.getDateOfVisit()))
+				.timeOfVisit(String.valueOf(unitVisit.getTimeOfVisit()))
+	            .nameOfThePerson(unitVisit.getNameOfThePerson())
+				.designation(unitVisit.getDesignation())
 	            .selectLandDetails(unitVisit.getSelectLandDetails())
 	            .factoryAddress(unitVisit.getFactoryAddress())
 	            .isSameAsFactoryAddress(unitVisit.getIsSameAsFactoryAddress())
@@ -49,7 +46,7 @@ public class UnitVisitResponseMapper {
 	            .noOfShifts(unitVisit.getNoOfShifts())
 	            .isStocksStoredProperty(unitVisit.getIsStocksStoredProperty())
 	            .isAdequateStorageCapacity(unitVisit.getIsAdequateStorageCapacity())
-	            .stocksMaintaned(unitVisit.getStocksMaintaned())
+	            .stocksMaintained(unitVisit.getStocksMaintained())
 	            .isUptoDate(unitVisit.getIsUptoDate())
 	            .valueOfTheStock(unitVisit.getValueOfTheStock())
 	            .rawMaterials(unitVisit.getRawMaterials())
@@ -66,6 +63,4 @@ public class UnitVisitResponseMapper {
 	            .factoryDetails(factoryDtoList)
 	            .build();
 	}
-
-
 }

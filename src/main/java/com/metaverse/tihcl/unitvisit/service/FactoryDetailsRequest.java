@@ -1,13 +1,13 @@
 package com.metaverse.tihcl.unitvisit.service;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class FactoryDetailsRequest {
-
-	private Integer factoryDetails;
 
 	private String typesOfMachine;
 
@@ -20,5 +20,4 @@ public class FactoryDetailsRequest {
 	private String currentCondition;
 
 	private Integer valueOfMachinery;
-
 }

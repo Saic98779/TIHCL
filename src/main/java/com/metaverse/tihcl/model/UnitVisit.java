@@ -1,5 +1,7 @@
 package com.metaverse.tihcl.model;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -32,16 +34,22 @@ public class UnitVisit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "unit_visit_id")
-	private Long unutVisitId;
+	private Long unitVisitId;
 
 	@Column(name = "visited_by")
 	private String visitedBy;
 
-	@Column(name = "date_and_time_of_visit")
-	private Date dateAndTimeOfVisit;
+	@Column(name = "date_of_visit")
+	private LocalDate dateOfVisit;
 
-	@Column(name = "name_of_the_person_met_and_designation")
-	private String nameOfThePersonMetAndDesignation;
+	@Column(name = "time_of_visit")
+	private LocalTime timeOfVisit;
+
+	@Column(name = "name_of_the_person")
+	private String nameOfThePerson;
+
+	@Column(name = "designation")
+	private String designation;
 
 	@Column(name = "select_land_details")
 	private String selectLandDetails;
@@ -49,7 +57,7 @@ public class UnitVisit {
 	@Column(name = "factory_address")
 	private String factoryAddress;
 
-	@Column(name = "is_same_as_actory_ddress")
+	@Column(name = "is_same_as_actory_address")
 	private Boolean isSameAsFactoryAddress;
 
 	@Column(name = "register_address")
@@ -67,9 +75,7 @@ public class UnitVisit {
 	@Column(name = "is_financed_bank_name_board")
 	private Boolean isFinancedBankNameBoard;
 
-	// staff at the time of visit
-
-	@Column(name = "office_staff")
+	@Column(name = "office_staff")// staff at the time of visit
 	private Integer officeStaff;
 
 	@Column(name = "factory_workers")
@@ -99,12 +105,11 @@ public class UnitVisit {
 	@Column(name = "is_adequate_storage_capacity")
 	private Boolean isAdequateStorageCapacity;
 
-//		stocks record
-	@Column(name = "stocks_maintaned")
-	private String stocksMaintaned;
+	@Column(name = "stocks_maintained")//stocks record
+	private String stocksMaintained;
 
 	@Column(name = "is_uptodate")
-	private String isUptoDate;
+	private Boolean isUptoDate;
 
 	@Column(name = "value_of_the_stock")
 	private Double valueOfTheStock;
@@ -127,7 +132,7 @@ public class UnitVisit {
 	@Column(name = "current_production_in_unit")
 	private Double currentProductionInUnit;
 
-	@Column(name = "cost_per_unitl")
+	@Column(name = "cost_per_unit")
 	private Double costPerUnit;
 
 	@Column(name = "selling_price_per_unit")
@@ -137,7 +142,6 @@ public class UnitVisit {
 	private Double profitMargin;
 
 	// Electricity Bill
-
 	@Column(name = "recent_consumption")
 	private Double recentConsumption;
 
@@ -154,5 +158,4 @@ public class UnitVisit {
 	@Column(name = "updated_on", insertable = false, updatable = true)
 	@UpdateTimestamp
 	private Date updatedOn;
-
 }

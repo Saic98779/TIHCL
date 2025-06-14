@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.metaverse.tihcl.model.UnitVisit;
 
 @Repository
-public interface UnitVisitRepo extends JpaRepository<UnitVisit, Integer> {
-
+public interface UnitVisitRepo extends JpaRepository<UnitVisit, Long> {
 }

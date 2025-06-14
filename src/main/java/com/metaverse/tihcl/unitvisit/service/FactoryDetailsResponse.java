@@ -13,7 +13,6 @@ import lombok.Setter;
 @Builder
 public class FactoryDetailsResponse {
 
-		
 	private Long id;
 
 	private String typesOfMachine;
@@ -27,5 +26,4 @@ public class FactoryDetailsResponse {
 	private String currentCondition;
 
 	private Integer valueOfMachinery;
-
 }
