@@ -20,6 +20,7 @@ public class RegistrationController {
     @Autowired
     RegistrationService registrationService;
 
+
     @PostMapping("/save")
     public ResponseEntity<?> saveRegistration(@RequestBody RegistrationRequest request) throws DataException {
         TihclResponse savedRegistration = null;

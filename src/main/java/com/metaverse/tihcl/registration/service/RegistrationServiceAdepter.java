@@ -4,21 +4,23 @@ import com.metaverse.tihcl.common.response.TihclResponse;
 import com.metaverse.tihcl.exceptions.DataException;
 import com.metaverse.tihcl.model.CreditFacilityDetails;
 import com.metaverse.tihcl.model.Registration;
+import com.metaverse.tihcl.registration.repository.RegistrationRepository;
+import lombok.RequiredArgsConstructor;
 import com.metaverse.tihcl.model.RegistrationUsage;
 import com.metaverse.tihcl.registration.repository.CreditFacilityDetailsRepository;
 import com.metaverse.tihcl.registration.repository.RegistrationRepository;
 import com.metaverse.tihcl.registration.repository.RegistrationUsageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class RegistrationServiceAdepter implements RegistrationService {
-    @Autowired
-    RegistrationRepository registrationRepository;
+
+    private final RegistrationRepository registrationRepository;
 
     @Autowired
     RegistrationUsageRepo registrationUsageRepo;
@@ -26,11 +28,11 @@ public class RegistrationServiceAdepter implements RegistrationService {
     CreditFacilityDetailsRepository creditFacilityDetailsRepository;
 
     @Override
-    @Transactional
     public TihclResponse saveRegistration(RegistrationRequest request) throws DataException {
         Registration registration;
         if (request.getRegistrationId() == null) {
          if(registrationRepository.findByContactNumber(request.getContactNumber()) != null)
+
          return TihclResponse.builder().message(request.getContactNumber() + " This Contact Number is already exists").status(400).build();
          String applicationNo="TH"+((int)(Math.random() * 900000) + 10000);
          if(registrationRepository.existsByApplicationNo(applicationNo))
@@ -77,7 +79,7 @@ public class RegistrationServiceAdepter implements RegistrationService {
                 .data(RegistrationResponseMapper.map(registration)).build();
     }
 
-    @Override
+
     public TihclResponse getRegistrationByMobilNo(Long mobileNo) throws DataException {
         RegistrationUsage registration = registrationUsageRepo.findByContactNumber(mobileNo);
         if (registration == null)
