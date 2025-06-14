@@ -1,5 +1,6 @@
 package com.metaverse.tihcl.diagnosticreport.service;
 
+import com.metaverse.tihcl.common.response.TihclResponse;
 import com.metaverse.tihcl.diagnosticreport.dto.*;
 import com.metaverse.tihcl.diagnosticreport.repository.*;
 import com.metaverse.tihcl.model.*;
@@ -160,5 +161,15 @@ public class DiagnosticReportService {
                 throw new RuntimeException("Error while mapping collection", e);
             }
         }).collect(Collectors.toList());
+    }
+
+    public TihclResponse deleteShareholdingByid(Long id) {
+        if(diagnosticReportRepository.existsById(id)){
+            diagnosticReportRepository.deleteById(id);
+            return  TihclResponse.builder().status(200).message("Deleted "+id).build();
+        }else {
+            return TihclResponse.builder().status(400).message("Share Holder Isn't Found "+id).build();
+        }
+
     }
 }

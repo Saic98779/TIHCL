@@ -8,5 +8,6 @@ public interface RegistrationService {
     TihclResponse getRegistrationById(Long id) throws DataException;
     TihclResponse getRegistrationByMobilNo(Long mobileNo) throws DataException;
     TihclResponse getAllRegistrations() throws DataException;
+    TihclResponse savePreliminaryAssessment(PreliminaryAssessmentRequest request,String applicationNo)throws DataException;
 
 }

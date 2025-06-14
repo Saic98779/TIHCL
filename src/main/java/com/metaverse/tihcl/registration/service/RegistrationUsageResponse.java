@@ -6,12 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RegistrationRequest {
-
+public class RegistrationUsageResponse {
     private Long registrationId;
     private String enterpriseName;
     private String promoterName;
@@ -19,7 +19,6 @@ public class RegistrationRequest {
     private String productionDate;
     private String udyamRegNumber;
     private Long contactNumber;
-    private Long altContactNumber;
     private String industrialPark;
     private String state;
     private String district;
@@ -37,7 +36,7 @@ public class RegistrationRequest {
     private String restartSupport;
     private Boolean restartIntent;
     private Boolean existingCredit;
-    private List<CreditFacilityDetailsRequest> creditFacilityDetails;
+    private List<CreditFacilityDetailsResponse> creditFacilityDetailsUsage;
     private String unitStatus;
     private Double requiredCreditLimit;
     private Boolean investmentSubsidy;
@@ -46,5 +45,7 @@ public class RegistrationRequest {
     private Double amountToBeReleased;
     private String maintainingAccountBy;
     private String helpMsg;
-
+    private String applicationNo;
+    private String status;
+    private String dateOfSubmission;
 }

@@ -46,7 +46,4 @@ public class TiHclApplication extends SpringBootServletInitializer {
 			commonUtil.init();
 		};
 	}
-
-
-
 }

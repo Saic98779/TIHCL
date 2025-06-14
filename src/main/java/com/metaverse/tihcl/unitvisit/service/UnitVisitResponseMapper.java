@@ -1,6 +1,5 @@
 package com.metaverse.tihcl.unitvisit.service;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 import com.metaverse.tihcl.model.UnitVisit;
@@ -8,19 +7,6 @@ import com.metaverse.tihcl.model.UnitVisit;
 public class UnitVisitResponseMapper {
 
 	public static UnitVisitResponse convertEntityToDto(UnitVisit unitVisit) {
-	    // Convert child entities first using builder
-	    List<FactoryDetailsResponse> factoryDtoList =  unitVisit.getFactoryDetails()
-	        .stream()
-	        .map(entity -> FactoryDetailsResponse.builder().id(entity.getId())
-	                .typesOfMachine(entity.getTypesOfMachine())
-	                .purpose(entity.getPurpose())
-	                .noOfMachines(entity.getNoOfMachines())
-	                .costOfMachinePurchased(entity.getCostOfMachinePurchased())
-	                .currentCondition(entity.getCurrentCondition())
-	                .valueOfMachinery(entity.getValueOfMachinery())
-	                .build())
-	        .collect(Collectors.toList());
-	    // Build main DTO
 	    return UnitVisitResponse.builder()
 	    		.id(unitVisit.getUnitVisitId())
 	            .visitedBy(unitVisit.getVisitedBy())
@@ -60,7 +46,17 @@ public class UnitVisitResponseMapper {
 	            .profitMargin(unitVisit.getProfitMargin())
 	            .recentConsumption(unitVisit.getRecentConsumption())
 	            .maxConsumption(unitVisit.getMaxConsumption())
-	            .factoryDetails(factoryDtoList)
+	            .factoryDetails(unitVisit.getFactoryDetails()
+						.stream()
+						.map(entity -> FactoryDetailsResponse.builder().id(entity.getId())
+								.typesOfMachine(entity.getTypesOfMachine())
+								.purpose(entity.getPurpose())
+								.noOfMachines(entity.getNoOfMachines())
+								.costOfMachinePurchased(entity.getCostOfMachinePurchased())
+								.currentCondition(entity.getCurrentCondition())
+								.valueOfMachinery(entity.getValueOfMachinery())
+								.build())
+						.collect(Collectors.toList()))
 	            .build();
 	}
 }

@@ -1,8 +1,10 @@
 package com.metaverse.tihcl.diagnosticreport.controller;
 
 
+import com.metaverse.tihcl.common.response.TihclResponse;
 import com.metaverse.tihcl.diagnosticreport.dto.DiagnosticReportDto;
 import com.metaverse.tihcl.diagnosticreport.service.DiagnosticReportService;
+import com.metaverse.tihcl.unitvisit.controller.ResponseMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +34,13 @@ public class DiagnosticReportController {
             System.err.println("Error saving diagnostic report data: " + e.getMessage());
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+
+    @DeleteMapping(path = "/Shareholding/delete/{id}")
+    public ResponseEntity<?> deleteShareholdingRecord(@PathVariable Long id){
+        System.out.println(id);
+        TihclResponse response = diagnosticReportService.deleteShareholdingByid(id);
+        return ResponseEntity.status(response.getStatus()).body(new ResponseMessage(response.getStatus(),response.getMessage(),response.getData()));
     }
 }

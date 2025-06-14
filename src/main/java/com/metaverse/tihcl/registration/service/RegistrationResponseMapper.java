@@ -1,9 +1,7 @@
 package com.metaverse.tihcl.registration.service;
 
 import com.metaverse.tihcl.common.util.DateUtil;
-import com.metaverse.tihcl.model.CreditFacilityDetails;
-import com.metaverse.tihcl.model.Registration;
-import com.metaverse.tihcl.model.RegistrationUsage;
+import com.metaverse.tihcl.model.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -85,7 +83,7 @@ public class RegistrationResponseMapper {
                 .restartSupport(registration.getRestartSupport())
                 .restartIntent(registration.getRestartIntent())
                 .existingCredit(registration.getExistingCredit())
-                .creditFacilityDetails(mapCreditFacilityDetails(registration.getCreditFacilityDetails()))
+               // .creditFacilityDetails(mapCreditFacilityDetails(registration.getCreditFacilityDetails()))
                 .unitStatus(registration.getUnitStatus())
                 .requiredCreditLimit(registration.getRequiredCreditLimit())
                 .investmentSubsidy(registration.getInvestmentSubsidy())
@@ -116,4 +114,60 @@ public class RegistrationResponseMapper {
                         .build())
                 .collect(Collectors.toList());
     }
+    private static List<CreditFacilityDetailsResponse> mapCreditFacilityDetailsUsage(List<CreditFacilityDetailsUsage> detailsList) {
+        if (detailsList == null) {
+            return null;
+        }
+
+        return detailsList.stream()
+                .map(detail -> CreditFacilityDetailsResponse.builder()
+                        .CreditFacilityDetailsId(detail.getCreditFacilityDetailsId())
+                        .bankName(detail.getBankName())
+                        .limitSanctioned(detail.getLimitSanctioned())
+                        .outstandingAmount(detail.getOutstandingAmount())
+                        .overdueAmount(detail.getOverdueAmount())
+                        .overdueDate(detail.getOverdueDate() != null ? DateUtil.dateToString(detail.getOverdueDate()) : null)
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+
+    private static List<StressScoreResponse> mapStressScore(List<StressScore> scores) {
+        if (scores == null) {
+            return null;
+        }
+
+        return scores.stream()
+                .map(score -> StressScoreResponse.builder()
+                        .issue(score.getIssues())
+                        .riskCategorisation(score.getRiskCategorisation())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    public static PreliminaryAssessmentResponse mapPreliminary(RegistrationUsage registration)
+    {
+
+        return PreliminaryAssessmentResponse.builder()
+                .enterpriseName(registration.getEnterpriseName())
+                .udyamRegNumber(registration.getUdyamRegNumber())
+                .enterpriseCategory(registration.getEnterpriseCategory())
+                .district(registration.getDistrict())
+                .mandal(registration.getMandal())
+                .address(registration.getAddress())
+                .natureOfActivity(registration.getNatureOfActivity())
+                .existingCredit(registration.getExistingCredit())
+                .creditFacilityDetails(mapCreditFacilityDetailsUsage(registration.getCreditFacilityDetailsUsages()))
+                .gstNumber(registration.getGstNumber())
+                .typeOfProduct(registration.getTypeOfProduct())
+                .productUsage(registration.getProductUsage())
+                .problemsFaced(registration.getProblemsFaced())
+                .expectedSolution(registration.getExpectedSolution())
+                .riskCategories(mapStressScore(registration.getStressScore()))
+                .riskCategoryScore(registration.getRiskCategoryScore())
+                .observations(registration.getObservations())
+                .status(registration.getStatus())
+                .build();
+    }
+
 }

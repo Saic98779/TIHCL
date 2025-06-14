@@ -1,5 +1,6 @@
 package com.metaverse.tihcl.unitvisit.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +12,11 @@ import com.metaverse.tihcl.unitvisit.service.UnitVisitService;
 
 @RestController
 @RequestMapping(path = "/unitvisit")
+@RequiredArgsConstructor
 public class UnitVisitController {
 	
 	@Autowired
-	private UnitVisitService unitVisitservice;
+	private final UnitVisitService unitVisitservice;
 
 	@PostMapping(path = "/save")
 	public ResponseEntity<?> savingUnitVisitData(@RequestBody UnitVisitRequest request) {
