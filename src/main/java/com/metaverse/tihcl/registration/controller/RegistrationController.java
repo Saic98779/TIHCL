@@ -3,20 +3,22 @@ package com.metaverse.tihcl.registration.controller;
 import com.metaverse.tihcl.common.response.TihclResponse;
 import com.metaverse.tihcl.common.util.RestControllerBase;
 import com.metaverse.tihcl.exceptions.DataException;
+<<<<<<< HEAD
 import com.metaverse.tihcl.registration.service.PreliminaryAssessmentRequest;
+=======
+>>>>>>> 6515833082fe9660e45973eebef87302a238bf12
 import com.metaverse.tihcl.registration.service.RegistrationRequest;
 import com.metaverse.tihcl.registration.service.RegistrationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/registrations")
 public class RegistrationController {
 
-    @Autowired
-    RegistrationService registrationService;
-
+    private final RegistrationService registrationService;
 
     @PostMapping("/save")
     public ResponseEntity<?> saveRegistration(@RequestBody RegistrationRequest request) throws DataException {

@@ -4,7 +4,12 @@ import com.metaverse.tihcl.common.response.TihclResponse;
 import com.metaverse.tihcl.exceptions.DataException;
 import com.metaverse.tihcl.model.CreditFacilityDetails;
 import com.metaverse.tihcl.model.Registration;
+<<<<<<< HEAD
 import com.metaverse.tihcl.model.RegistrationStatus;
+=======
+import com.metaverse.tihcl.registration.repository.RegistrationRepository;
+import lombok.RequiredArgsConstructor;
+>>>>>>> 6515833082fe9660e45973eebef87302a238bf12
 import com.metaverse.tihcl.model.RegistrationUsage;
 import com.metaverse.tihcl.registration.repository.CreditFacilityDetailsRepository;
 import com.metaverse.tihcl.registration.repository.RegistrationRepository;
@@ -12,15 +17,21 @@ import com.metaverse.tihcl.registration.repository.RegistrationStatusRepository;
 import com.metaverse.tihcl.registration.repository.RegistrationUsageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class RegistrationServiceAdepter implements RegistrationService {
+<<<<<<< HEAD
     @Autowired
     RegistrationRepository registrationRepository;
+=======
+
+    private final RegistrationRepository registrationRepository;
+
+>>>>>>> 6515833082fe9660e45973eebef87302a238bf12
     @Autowired
     RegistrationUsageRepo registrationUsageRepo;
     @Autowired
@@ -29,16 +40,25 @@ public class RegistrationServiceAdepter implements RegistrationService {
     RegistrationStatusRepository registrationStatusRepo;
 
     @Override
-    @Transactional
     public TihclResponse saveRegistration(RegistrationRequest request) throws DataException {
         Registration registration;
         if (request.getRegistrationId() == null) {
+<<<<<<< HEAD
             if (registrationRepository.findByContactNumber(request.getContactNumber()) != null)
                 return TihclResponse.builder().message(request.getContactNumber() + " This Contact Number is already exists").status(400).build();
             String applicationNo = "TH" + ((int) (Math.random() * 900000) + 10000);
             if (registrationRepository.existsByApplicationNo(applicationNo))
                 applicationNo = "TH" + ((int) (Math.random() * 900000) + 100000);
             registration = RegistrationRequestMapper.mapRegistration(request, applicationNo);
+=======
+         if(registrationRepository.findByContactNumber(request.getContactNumber()) != null)
+
+         return TihclResponse.builder().message(request.getContactNumber() + " This Contact Number is already exists").status(400).build();
+         String applicationNo="TH"+((int)(Math.random() * 900000) + 10000);
+         if(registrationRepository.existsByApplicationNo(applicationNo))
+             applicationNo="TH"+((int)(Math.random() * 900000) + 100000);
+            registration = RegistrationRequestMapper.mapRegistration(request,applicationNo);
+>>>>>>> 6515833082fe9660e45973eebef87302a238bf12
         } else {
             registration = registrationRepository.findById(request.getRegistrationId())
                     .orElseThrow(() -> new DataException(
@@ -86,7 +106,10 @@ public class RegistrationServiceAdepter implements RegistrationService {
     }
 
 
+<<<<<<< HEAD
     @Override
+=======
+>>>>>>> 6515833082fe9660e45973eebef87302a238bf12
     public TihclResponse getRegistrationByMobilNo(Long mobileNo) throws DataException {
         RegistrationUsage registration = registrationUsageRepo.findByContactNumber(mobileNo);
         if (registration == null)
