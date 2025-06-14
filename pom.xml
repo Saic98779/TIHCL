@@ -11,7 +11,7 @@
 	<groupId>com.metaverse</groupId>
 	<artifactId>tihcl</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>TIHCL</name>
 	<description>TIHCL project for Spring Boot</description>
 	<url/>
